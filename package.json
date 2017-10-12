@@ -1,7 +1,7 @@
 {
     "name": "eval-selection",
-    "displayName": "eval-selection",
-    "description": "Evaluate selection",
+    "displayName": "Evaluate selection in-place",
+    "description": "Evaluate selection in-place",
     "version": "0.2.0",
     "publisher": "cprogrammer1994",
     "engines": {
@@ -11,7 +11,8 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.evaluateSelectionInplace"
+        "onCommand:extension.evaluateSelectionInplace",
+        "onCommand:extension.evaluateSelectionForLaterUse"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -19,6 +20,10 @@
             {
                 "command": "extension.evaluateSelectionInplace",
                 "title": "Evaluate selection in-place"
+            },
+            {
+                "command": "extension.evaluateSelectionForLaterUse",
+                "title": "Evaluate selection for later use"
             }
         ]
     },

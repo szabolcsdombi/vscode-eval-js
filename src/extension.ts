@@ -25,23 +25,16 @@ function compareSelection(a, b) {
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    // console.log('Congratulations, your extension "eval-selection" is now active!');
+    let ctx = {
+    }
 
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('extension.evaluateSelectionInplace', () => {
+    let disposable1 = vscode.commands.registerCommand('extension.evaluateSelectionInplace', () => {
         const editor = vscode.window.activeTextEditor;
         var selections: vscode.Selection[] = editor.selections;
         selections = selections.sort(compareSelection)
 
         editor.edit(builder => {
-            var ctx = {
-                'i': 0,
-            }
-
+            ctx['i'] = 0;
             for (const selection of selections) {
                 var text = editor.document.getText(selection);
                 builder.replace(selection, safeEval(text, ctx).toString());
@@ -50,7 +43,26 @@ export function activate(context: vscode.ExtensionContext) {
         });
     });
 
-    context.subscriptions.push(disposable);
+    let disposable2 = vscode.commands.registerCommand('extension.evaluateSelectionForLaterUse', () => {
+        const editor = vscode.window.activeTextEditor;
+        var selections: vscode.Selection[] = editor.selections;
+        selections = selections.sort(compareSelection)
+
+        editor.edit(builder => {
+            ctx['i'] = 0;
+            for (const selection of selections) {
+                var text = editor.document.getText(selection);
+                var sep = text.indexOf('=');
+                var name = text.substr(0, sep).trim();
+                var value = text.substr(sep + 1).trim();
+                ctx[name] = safeEval(value, ctx).toString();
+                ctx['i'] += 1;
+            }
+        });
+    });
+
+    context.subscriptions.push(disposable1);
+    context.subscriptions.push(disposable2);
 }
 
 // this method is called when your extension is deactivated
