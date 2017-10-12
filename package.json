@@ -11,14 +11,14 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.evaluateSelection"
+        "onCommand:extension.evaluateSelectionInplace"
     ],
     "main": "./out/extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.evaluateSelection",
-                "title": "Evaluate selection"
+                "command": "extension.evaluateSelectionInplace",
+                "title": "Evaluate selection in-place"
             }
         ]
     },
