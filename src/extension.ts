@@ -4,6 +4,23 @@
 import * as vscode from 'vscode';
 import * as safeEval from 'safe-eval';
 
+// Selections are sorted by their start position
+function compareSelection(a, b) {
+    if (a.start.line < b.start.line) {
+        return -1;
+    }
+    if (a.start.line > b.start.line) {
+        return 1;
+    }
+    if (a.start.character < b.start.character) {
+        return -1;
+    }
+    if (a.start.character > b.start.character) {
+        return 1;
+    }
+    return 0;
+}
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -17,7 +34,8 @@ export function activate(context: vscode.ExtensionContext) {
     // The commandId parameter must match the command field in package.json
     let disposable = vscode.commands.registerCommand('extension.evaluateSelection', () => {
         const editor = vscode.window.activeTextEditor;
-        const selections: vscode.Selection[] = editor.selections;
+        var selections: vscode.Selection[] = editor.selections;
+        selections = selections.sort(compareSelection)
 
         editor.edit(builder => {
             var ctx = {
