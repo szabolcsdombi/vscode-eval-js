@@ -1,3 +1,3 @@
 # eval-selection
 
-Evaluate selection **inplace** using safeEval.
+Evaluate selection **in-place** using safeEval.
