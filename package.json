@@ -2,7 +2,7 @@
     "name": "eval-selection",
     "displayName": "eval-selection",
     "description": "Evaluate selection",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "publisher": "cprogrammer1994",
     "engines": {
         "vscode": "^1.17.0"
