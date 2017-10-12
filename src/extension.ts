@@ -20,9 +20,14 @@ export function activate(context: vscode.ExtensionContext) {
         const selections: vscode.Selection[] = editor.selections;
 
         editor.edit(builder => {
+            var ctx = {
+                'i': 0,
+            }
+
             for (const selection of selections) {
                 var text = editor.document.getText(selection);
-                builder.replace(selection, safeEval(text).toString());
+                builder.replace(selection, safeEval(text, ctx).toString());
+                ctx['i'] += 1;
             }
         });
     });
