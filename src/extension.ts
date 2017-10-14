@@ -6,7 +6,7 @@ import * as safeEval from 'safe-eval';
 
 // Wrap safeEval to keep indentation
 function sEval(x, ctx) {
-    var indent = x.substr(0, x.indexOf(x.trim()));
+    let indent = x.substr(0, x.indexOf(x.trim()));
     return indent + safeEval(x, ctx);
 }
 
@@ -36,14 +36,14 @@ export function activate(context: vscode.ExtensionContext) {
 
     let disposable1 = vscode.commands.registerCommand('extension.evaluateAndReplaceSelection', () => {
         const editor = vscode.window.activeTextEditor;
-        var selections: vscode.Selection[] = editor.selections;
+        let selections: vscode.Selection[] = editor.selections;
         selections = selections.sort(compareSelection)
 
         editor.edit(builder => {
             ctx['i'] = 0;
             for (const selection of selections) {
-                var text = editor.document.getText(selection);
-                var result = text.split('\n').map(val => sEval(val, ctx)).join('\n');
+                let text = editor.document.getText(selection);
+                let result = text.split('\n').map(val => sEval(val, ctx)).join('\n');
                 builder.replace(selection, result);
             }
         });
@@ -51,16 +51,16 @@ export function activate(context: vscode.ExtensionContext) {
 
     let disposable2 = vscode.commands.registerCommand('extension.evaluateInGlobalContext', () => {
         const editor = vscode.window.activeTextEditor;
-        var selections: vscode.Selection[] = editor.selections;
+        let selections: vscode.Selection[] = editor.selections;
         selections = selections.sort(compareSelection)
 
         editor.edit(builder => {
             ctx['i'] = 0;
             for (const selection of selections) {
-                var text = editor.document.getText(selection);
-                var sep = text.indexOf('=');
-                var name = text.substr(0, sep).trim();
-                var value = text.substr(sep + 1).trim();
+                let text = editor.document.getText(selection);
+                let sep = text.indexOf('=');
+                let name = text.substr(0, sep).trim();
+                let value = text.substr(sep + 1).trim();
                 ctx[name] = value.split('\n').map(val => sEval(val, ctx)).join('\n');;
                 ctx['i'] += 1;
             }
