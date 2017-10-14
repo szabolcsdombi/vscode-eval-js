@@ -4,10 +4,18 @@
 import * as vscode from 'vscode';
 import * as safeEval from 'safe-eval';
 
-// Wrap safeEval to keep indentation and increment `i`
+// Returns the indentation
+function indentOf(x) {
+    return x.substr(0, x.indexOf(x.trim()));
+}
+
+// Wrap safeEval to increment `i`
 function sEval(x, ctx) {
-    let indent = x.substr(0, x.indexOf(x.trim()));
-    let res = indent + safeEval(x, ctx);
+    let text = x.trim();
+    if (text === '') {
+        return '';
+    }
+    let res = safeEval(text, ctx);
     ctx['i'] += 1; // TODO: ugly
     return res;
 }
@@ -46,7 +54,7 @@ export function activate(context: vscode.ExtensionContext) {
             for (const selection of selections) {
                 let text = editor.document.getText(selection);
                 let result = text.split('\n').map(val => sEval(val, ctx)).join('\n');
-                builder.replace(selection, result);
+                builder.replace(selection, indentOf(text) + result);
             }
         });
     });
