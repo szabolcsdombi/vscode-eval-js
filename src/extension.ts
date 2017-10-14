@@ -37,8 +37,16 @@ export function activate(context: vscode.ExtensionContext) {
             ctx['i'] = 0;
             for (const selection of selections) {
                 var text = editor.document.getText(selection);
-                builder.replace(selection, safeEval(text, ctx).toString());
-                ctx['i'] += 1;
+                var lines = text.split("\n");
+                var result = "";
+                for (var k = 0; k < lines.length; ++k) {
+                    if (k) {
+                        result += "\n";
+                    }
+                    result += safeEval(lines[k], ctx).toString();
+                    ctx['i'] += 1;
+                }
+                builder.replace(selection, result);
             }
         });
     });
