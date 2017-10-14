@@ -4,6 +4,12 @@
 import * as vscode from 'vscode';
 import * as safeEval from 'safe-eval';
 
+// Wrap safeEval to keep indentation
+function sEval(x, ctx) {
+    var indent = x.substr(0, x.indexOf(x.trim()));
+    return indent + safeEval(x, ctx);
+}
+
 // Selections are sorted by their start position
 function compareSelection(a, b) {
     if (a.start.line < b.start.line) {
@@ -37,7 +43,7 @@ export function activate(context: vscode.ExtensionContext) {
             ctx['i'] = 0;
             for (const selection of selections) {
                 var text = editor.document.getText(selection);
-                var result = text.split('\n').map(val => safeEval(val, ctx)).join('\n');
+                var result = text.split('\n').map(val => sEval(val, ctx)).join('\n');
                 builder.replace(selection, result);
             }
         });
@@ -55,7 +61,7 @@ export function activate(context: vscode.ExtensionContext) {
                 var sep = text.indexOf('=');
                 var name = text.substr(0, sep).trim();
                 var value = text.substr(sep + 1).trim();
-                ctx[name] = value.split('\n').map(val => safeEval(val, ctx)).join('\n');;
+                ctx[name] = value.split('\n').map(val => sEval(val, ctx)).join('\n');;
                 ctx['i'] += 1;
             }
         });
