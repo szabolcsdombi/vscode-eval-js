@@ -11,5 +11,6 @@ Evaluate selection **in-place** using safeEval in vscode.
 
 ## Links
 
+- [Github](https://github.com/cprogrammer1994/vscode-evaluate-selection-inplace)
 - [Download page](https://marketplace.visualstudio.com/items?itemName=cprogrammer1994.eval-selection)
 - [Change log](CHANGELOG.md)
