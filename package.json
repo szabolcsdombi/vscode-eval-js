@@ -3,7 +3,7 @@
     "icon": "icon.png",
     "displayName": "Evaluate selection in-place",
     "description": "Evaluate selection in-place",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "publisher": "cprogrammer1994",
     "repository": {
         "type": "git",
