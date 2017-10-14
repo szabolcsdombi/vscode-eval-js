@@ -17,7 +17,7 @@
     ],
     "activationEvents": [
         "onCommand:extension.evaluateAndReplaceSelection",
-        "onCommand:extension.evaluateInGlobalContext"
+        "onCommand:extension.evaluateSelectionInGlobalContext"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -27,8 +27,8 @@
                 "title": "Evaluate and replace selection"
             },
             {
-                "command": "extension.evaluateInGlobalContext",
-                "title": "Evaluate in global context"
+                "command": "extension.evaluateSelectionInGlobalContext",
+                "title": "Evaluate selection in global context"
             }
         ]
     },

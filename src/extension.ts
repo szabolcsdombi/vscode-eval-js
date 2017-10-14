@@ -51,7 +51,7 @@ export function activate(context: vscode.ExtensionContext) {
         });
     });
 
-    let disposable2 = vscode.commands.registerCommand('extension.evaluateInGlobalContext', () => {
+    let disposable2 = vscode.commands.registerCommand('extension.evaluateSelectionInGlobalContext', () => {
         const editor = vscode.window.activeTextEditor;
         let selections: vscode.Selection[] = editor.selections;
         selections = selections.sort(compareSelection)
