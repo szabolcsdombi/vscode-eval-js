@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.1.0]
+
+### Added
+
+- Evaluate selection by lines
+- Keep indentation
+
+### Changed
+
+- Renamed "Evaluate selection inplace" to "Evaluate and replace selection"
+- Renamed "Evaluate selection for later use" to "Evaluate in global context"
+
 ## [1.0.0]
 
 ### Added
