@@ -60,10 +60,16 @@ export function activate(context: vscode.ExtensionContext) {
             ctx['i'] = 0;
             for (const selection of selections) {
                 let text = editor.document.getText(selection);
-                let sep = text.indexOf('=');
-                let name = text.substr(0, sep).trim();
-                let value = text.substr(sep + 1).trim();
-                ctx[name] = value.split('\n').map(val => sEval(val, ctx)).join('\n');
+                let lines = text.split('\n');
+                for (const line of lines) {
+                    let sep = line.indexOf('=');
+                    if (sep < 0) {
+                        continue;
+                    }
+                    let name = line.substr(0, sep).trim();
+                    let value = line.substr(sep + 1).trim();
+                    ctx[name] = sEval(value, ctx);
+                }
             }
         });
     });
