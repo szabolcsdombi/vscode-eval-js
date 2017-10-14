@@ -34,7 +34,7 @@ export function activate(context: vscode.ExtensionContext) {
     let ctx = {
     }
 
-    let disposable1 = vscode.commands.registerCommand('extension.evaluateSelectionInplace', () => {
+    let disposable1 = vscode.commands.registerCommand('extension.evaluateAndReplaceSelection', () => {
         const editor = vscode.window.activeTextEditor;
         var selections: vscode.Selection[] = editor.selections;
         selections = selections.sort(compareSelection)
@@ -49,7 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
         });
     });
 
-    let disposable2 = vscode.commands.registerCommand('extension.evaluateSelectionForLaterUse', () => {
+    let disposable2 = vscode.commands.registerCommand('extension.evaluateInGlobalContext', () => {
         const editor = vscode.window.activeTextEditor;
         var selections: vscode.Selection[] = editor.selections;
         selections = selections.sort(compareSelection)

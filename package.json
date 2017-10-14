@@ -16,19 +16,19 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.evaluateSelectionInplace",
-        "onCommand:extension.evaluateSelectionForLaterUse"
+        "onCommand:extension.evaluateAndReplaceSelection",
+        "onCommand:extension.evaluateInGlobalContext"
     ],
     "main": "./out/extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.evaluateSelectionInplace",
-                "title": "Evaluate selection in-place"
+                "command": "extension.evaluateAndReplaceSelection",
+                "title": "Evaluate and replace selection"
             },
             {
-                "command": "extension.evaluateSelectionForLaterUse",
-                "title": "Evaluate selection for later use"
+                "command": "extension.evaluateInGlobalContext",
+                "title": "Evaluate in global context"
             }
         ]
     },
