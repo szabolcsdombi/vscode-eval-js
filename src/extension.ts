@@ -55,7 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
                 var sep = text.indexOf('=');
                 var name = text.substr(0, sep).trim();
                 var value = text.substr(sep + 1).trim();
-                ctx[name] = safeEval(value, ctx);
+                ctx[name] = value.split('\n').map(val => safeEval(val, ctx)).join('\n');;
                 ctx['i'] += 1;
             }
         });
